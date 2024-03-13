@@ -1,10 +1,7 @@
 namespace CiroKebab.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Dettagli")]
     public partial class Dettagli
@@ -16,7 +13,7 @@ namespace CiroKebab.Models
 
         public int idProdotto_FK { get; set; }
 
-        public int Qauntita { get; set; }
+        public int Quantita { get; set; }
 
         public virtual Ordini Ordini { get; set; }
 

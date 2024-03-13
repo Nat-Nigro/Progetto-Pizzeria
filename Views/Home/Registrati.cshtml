@@ -4,15 +4,18 @@
     ViewBag.Title = "Registrati";
 }
 
-<h2>Registrati</h2>
 
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Utenti</h4>
+
+<div class="container">
+    <h1 class="my-3 titolo-registrati">Registratiazione nuovi utenti</h1>
+    <p class="fw-bold">Registrandoti potrai accedere ai nostri servizi, ed eviterai che The Rock in persona possa "layare the smackdown on your candy ass"</p>
+
+    <div class="form-horizontal ">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -65,15 +68,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Completa Registrazione" class="btn btn-success my-2" />
             </div>
         </div>
     </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

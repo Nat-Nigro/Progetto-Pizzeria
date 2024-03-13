@@ -1,10 +1,8 @@
 namespace CiroKebab.Models
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("Utenti")]
     public partial class Utenti
@@ -32,6 +30,7 @@ namespace CiroKebab.Models
 
         [Required]
         [StringLength(50)]
+        [DataType(DataType.Password)]
         public string Psw { get; set; }
 
         public bool isAdmin { get; set; }

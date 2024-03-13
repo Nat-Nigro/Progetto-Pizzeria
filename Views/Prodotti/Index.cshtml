@@ -4,66 +4,49 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <h1 class="text-center my-3 titolo-prodotti">Pizza TheRock - Le nostre pizze </h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Foto3)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Consegna)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </th>
-        <th></th>
-    </tr>
+    <div class="row">
+        @foreach (var item in Model)
+        {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Foto3)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prezzo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Consegna)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredienti)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idProdotto }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idProdotto }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idProdotto })
-        </td>
-    </tr>
-}
+            <div class="col-md-4 gy-4">
+                <div class="card h-100" alt="...">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="~/Content/@item.Foto" class="d-block w-100" style="height: 295px;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/@item.Foto2" class="d-block w-100" style="height: 295px;" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/Content/@item.Foto3" class="d-block w-100" style="height: 295px;" alt="...">
+                            </div>
+                        </div>
+                    </div>
 
-</table>
+                    <div class="card-body  ">
+                        <h5 class="card-title text-uppercase bg-warning text-white rounded-pill text-center py-2">@item.Nome</h5>
+                        <hr />
+                        <p class="card-text fw-bold ">Prezzo: @item.Prezzo.ToString("F2") $</p>
+                        <p class="card-text fw-bold">Consegna: @item.Consegna</p>
+                        <p class="card-text fw-bold text-truncate">Ingredienti: @item.Ingredienti</p>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="@Url.Action("Edit", "Prodotti", new { id=item.idProdotto })" class="btn btn-primary">Edit</a>
+                            <a href="@Url.Action("Delete", "Prodotti", new { id=item.idProdotto })" class="btn btn-primary">Delete</a>
+                        }
+                        <a href="@Url.Action("AddToCart", "Prodotti", new { id=item.idProdotto })" class="btn btn-success">Aggingi al carrello</a>
+                    </div>
+                </div>
+            </div>
+         
+            if ((Model.ToList().IndexOf(item) + 1) % 3 == 0)
+            {
+            @:</div><div class="row">
+            }
+        }
+    </div>
+</div>

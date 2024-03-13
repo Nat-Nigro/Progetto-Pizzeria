@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
@@ -11,25 +11,35 @@
 <body>
 
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Nome dell'applicazione", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <div class="container-fluid">
+            @Html.ActionLink("Pizzeria TheRock", "Index", "Home", new { area = "" }, new { @class = "navbar-brand titolo-nav" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Attiva/Disattiva spostamento" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Home |", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Prodotti", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new {area = ""}, new {@class = "nav-link"})</li>
+                        <li class="ms-auto">@Html.ActionLink("Logout", "LogOut", "Home", new { area = "" }, new { @class = "nav-link " })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Registrati", "Registrati", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Login", "LogIn", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET</p>
+        <footer class="container text-center">
+            <p class="fw-bold">&copy; @DateTime.Now.Year - Pizzeria made by Nat🐻</p>
         </footer>
     </div>
 

@@ -163,6 +163,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CarrelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdottiController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -195,6 +196,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\pizza.jpg" />
+    <Content Include="Content\img\rock.jpg" />
+    <Content Include="Content\img\rock2.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -249,6 +253,7 @@
     <Content Include="Views\Prodotti\Index.cshtml" />
     <Content Include="Views\Home\LogIn.cshtml" />
     <Content Include="Views\Home\Registrati.cshtml" />
+    <Content Include="Views\Carrello\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

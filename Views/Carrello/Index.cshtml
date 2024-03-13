@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CiroKebab.Models.Prodotti>
+@using CiroKebab.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 ">
+                <div class="card my-4 box-shadow ">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class="card-img-right flex-auto d-none d-lg-block" alt="Thumbnail [200x250]" src="~/Content/@item.Foto" style="width: 200px; height: 250px;">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="card-title">@Html.DisplayFor(modelItem => item.Nome)</h3>
+                                <p class="card-text"><strong>Prezzo:</strong> @Html.DisplayFor(modelItem => item.Prezzo) $</p>
+                                <p class="card-text"><strong>Consegna:</strong> @Html.DisplayFor(modelItem => item.Consegna)</p>
+                                <p class="card-text"><strong>Ingredienti:</strong> @Html.DisplayFor(modelItem => item.Ingredienti)</p>
+                                <div class="d-flex align-items-center">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.idProdotto }, new { @class = "btn btn-sm btn-outline-secondary me-3" })
+                                    }
+
+                                    @Html.ActionLink("Elimina", "Delete", new { id = item.idProdotto }, new { @class = "btn btn-sm btn-outline-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-md-6">
+            @* Inizia un form HTML con il metodo POST. Il form invierà i dati al metodo "Ordina" del controller "Carrello". *@
+            @using (Html.BeginForm("Ordina", "Carrello", FormMethod.Post))
+            {
+                @* Gruppo di input per le note. *@
+
+                <div class="my-4 card" style="height: 282px;">
+                    <h3 class="ms-2 mt-2">Indica eventuali preferenze ed il tuo indirizzo di consegna</h3>
+                    <div class="input-group ms-2  my-3">
+                        <span class="input-group-text ">Note</span>
+                        @* Campo di testo per le note. È richiesto. *@
+                        <textarea id="note" name="note" required class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+
+                    @* Gruppo di input per l'indirizzo. *@
+                    <div class="mb-3 ms-2">
+                        <div class="input-group">
+                            <span class="input-group-text" id="">Indirizzo</span>
+                            @* Campo di testo per l'indirizzo. È richiesto. *@
+                            <input type="text" class="form-control" id="indirizzo" name="indirizzo" required aria-describedby="">
+                        </div>
+                    </div>
+                    @* Bottone per inviare il form. *@
+                    <input type="submit" value="Completa ordine" class="btn btn-success fw-bold ms-2" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
