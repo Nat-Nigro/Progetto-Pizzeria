@@ -50,7 +50,7 @@ namespace CiroKebab.Controllers
 
             // Recupero del carrello dalla sessione
             var cart = Session["cart"] as List<Prodotti>;
-            if (cart != null && cart.Any())
+            if (cart != null && cart.Any()) // contiene sempre un elemento
             {
                 // Creazione di un nuovo ordine
                 Ordini newOrder = new Ordini();
@@ -71,7 +71,7 @@ namespace CiroKebab.Controllers
                     Dettagli newDetail = new Dettagli();
                     newDetail.idOrdine_FK = newOrder.idOrdine;
                     newDetail.idProdotto_FK = product.idProdotto;
-                    newDetail.Quantita = 1;
+                    newDetail.Quantita = Convert.ToInt32(product.Quantita);
 
                     // Aggiunta dei dettagli dell'ordine al database
                     db.Dettagli.Add(newDetail);
@@ -82,7 +82,7 @@ namespace CiroKebab.Controllers
             }
 
             // Impostazione del messaggio di conferma dell'ordine
-            TempData["CreateMess"] = "L'ordine è stato inviato correttamente";
+            TempData["Ordine"] = "L'ordine è stato inviato correttamente";
 
             // Reindirizzamento alla pagina dei prodotti
             return RedirectToAction("Index", "Prodotti");

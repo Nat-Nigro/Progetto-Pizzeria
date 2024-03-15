@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Applicazione ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 </head>
 <body>
 
@@ -24,6 +25,10 @@
                     {
                         <li>@Html.ActionLink("Prodotti", "Index", "Prodotti", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Carrello 🛒", "Index", "Carrello", new {area = ""}, new {@class = "nav-link"})</li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Ordini", "Index", "Ordini", new {area = ""}, new {@class = "nav-link"})</li>
+                        }
                         <li class="ms-auto">@Html.ActionLink("Logout", "LogOut", "Home", new { area = "" }, new { @class = "nav-link " })</li>
                     }
                     else
@@ -39,7 +44,8 @@
         @RenderBody()
         <hr />
         <footer class="container text-center">
-            <p class="fw-bold">&copy; @DateTime.Now.Year - Pizzeria made by Nat🐻</p>
+            <p class="fw-bold h5">&copy; @DateTime.Now.Year - Pizzeria made by Nat - Powered By
+            <span class="napoli">BellaNapoli - Panucci's Pizza & Francesco's Pizza</span></p>
         </footer>
     </div>
 

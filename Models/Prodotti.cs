@@ -17,6 +17,9 @@ namespace CiroKebab.Models
         [Key]
         public int idProdotto { get; set; }
 
+        [NotMapped]
+        public int? Quantita { get; set; }
+
         [Required]
         [StringLength(50)]
         public string Nome { get; set; }

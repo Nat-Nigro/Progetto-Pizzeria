@@ -1,0 +1,127 @@
+﻿@model IEnumerable<CiroKebab.Models.Ordini>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="container">
+    
+
+    <table class="table table-bordered table-hover mt-3">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Utenti.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Indirizzo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Totale)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.idEvaso)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataOrdine)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Utenti.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Indirizzo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Totale) €
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.idEvaso)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataOrdine)
+                </td>
+                <td>
+                    @if (item.idEvaso == false)
+                    {
+                        @Html.ActionLink("Evadi Ordine", "IsEvaso", new { id = item.idOrdine }, new { @class = "btn btn-success  bg-gradient" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Annulla", "IsEvaso", new { id = item.idOrdine }, new { @class = "btn btn-danger  bg-gradient" })
+                    }
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.idOrdine }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.idOrdine }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.idOrdine }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="">
+        <h4>Inasso giornaliero</h4>
+        <input type="date" id="date" class="form-control" style="width: auto; " />
+        <button class="btn btn-info mt-2" onclick="getRevenueForDay(document.getElementById('date').value)">Totale incassato</button>
+        <p id="totPerGiorno" class="mt-2 fw-bold text-danger"></p>
+    </div>
+    <h4>Totale ordini evasi</h4>
+    <div class="d-flex align-items-center justify-content-between">
+        @Html.ActionLink("Mostra totale ordini evasi ", "GetNumeroOrdini", new { }, new
+        {
+            @class = " btn btn-info rounded-1 w-25",
+        @onclick = "totalOrders(); return false;"
+        })
+
+    </div>
+    <p id="totalOrders" class="text-danger"></p>
+</div>
+@section Scripts{
+    <script>
+          function totalOrders() {
+        $.ajax({
+            url: '@Url.Action("GetNumeroOrdini", "Ordini")',
+            type: 'GET',
+            success: function (data) {
+                $('#totalOrders').text('Ordini evasi: ' + data);
+            },
+            error: function () {
+                $('#totalOrders').text('Error retrieving total orders.');
+            }
+        });
+        }
+       function getRevenueForDay(date) {
+    if (!date) {
+        $('#totPerGiorno').text('Selezionare una data valida');
+        return;
+    }
+    $.ajax({
+        url: '@Url.Action("IncassatoPerGiorno", "Ordini")',
+        type: 'GET',
+        data: { data: date },
+        success: function (data) {
+            $('#totPerGiorno').text('Incasso per il giorno ' + date + ': ' + data + '€');
+        },
+        error: function (jqXHR) {
+            if(jqXHR.status==500){
+                $('#totPerGiorno').text('Nessun incasso per la data selezionata');
+            }
+        }
+    });
+}
+
+
+
+    </script>
+}
+

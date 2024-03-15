@@ -29,6 +29,7 @@ namespace CiroKebab.Models
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Password")]
         [StringLength(50)]
         [DataType(DataType.Password)]
         public string Psw { get; set; }

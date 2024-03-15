@@ -50,6 +50,7 @@ namespace CiroKebab.Controllers
             {
                 db.Prodotti.Add(prodotti);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -122,16 +123,40 @@ namespace CiroKebab.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AddToCart(int id)
+        // Questo metodo gestisce l'aggiunta di un prodotto al carrello.
+        public ActionResult AddToCart(int id, int Quantita)
         {
+            // Trova il prodotto nel database utilizzando l'ID fornito.
             var prodotto = db.Prodotti.Find(id);
             if (prodotto != null)
             {
+                // Ottiene il carrello dalla sessione o ne crea uno nuovo se non esiste.
                 var cart = Session["cart"] as List<Prodotti> ?? new List<Prodotti>();
-                cart.Add(prodotto);
+
+                // Imposta la quantità del prodotto.
+                prodotto.Quantita = Quantita;
+
+                // Controlla se il prodotto è già nel carrello.
+                if (cart.Any(p => p.idProdotto == id))
+                {
+                    // Se il prodotto è già nel carrello, aumenta la quantità.
+                    var productInCart = cart.First(p => p.idProdotto == id);
+                    productInCart.Quantita += Quantita;
+                }
+                else
+                {
+                    // Se il prodotto non è nel carrello, lo aggiunge.
+                    cart.Add(prodotto);
+                }
+
+                // Salva il carrello aggiornato nella sessione.
                 Session["cart"] = cart;
-                TempData["CreateMess"] = "Prodotto aggiunto al carrello";
+
+                // Imposta un messaggio temporaneo per informare l'utente che il prodotto è stato aggiunto al carrello.
+                TempData["AddCart"] = "Prodotto aggiunto correttamente";
             }
+
+            // Reindirizza l'utente all'indice.
             return RedirectToAction("Index");
         }
     }

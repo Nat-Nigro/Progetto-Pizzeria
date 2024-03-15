@@ -4,77 +4,81 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Prodotti</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
+<div class="container">
+    <h3 class="my-3">Sicuro di voler eliminare questo prodotto?</h3>
+    <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
+        <hr />
+        <div class="card">
+            <dl class="dl-horizontal ms-2">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Foto)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto2)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Foto)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Foto2)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Foto2)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Foto3)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Foto2)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Foto3)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Foto3)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Prezzo)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Foto3)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Prezzo)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Prezzo)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Consegna)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Prezzo)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Consegna)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Consegna)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ingredienti)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Consegna)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ingredienti)
-        </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ingredienti)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Ingredienti)
+                </dd>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            </dl>
         </div>
-    }
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Conferma eliminazione prodotto" class="btn btn-danger mt-2" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
 </div>

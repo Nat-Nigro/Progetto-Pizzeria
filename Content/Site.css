@@ -38,7 +38,7 @@ textarea {
     font-weight: 400;
     font-style: normal;
     text-align: center;
-    font-size: 6em;
+    font-size: 5.5em;
     color: wheat;
     text-shadow:  4px 8px rgba(0, 0, 0, 0.5),  -4px 7px rgba(0, 0, 0, 0.5);
     position: absolute;
@@ -48,11 +48,18 @@ textarea {
 .rock{
     position: absolute;
     bottom: 1px;
+    width: 26%;
 }
 
 .titolo-nav {
     font-family: "Madimi One", sans-serif;
     font-weight: 400;
+}
+
+.napoli{
+    color: deeppink;
+    font-style:italic;
+    
 }
 /*  Pagina Registrati  */
 
@@ -79,6 +86,10 @@ textarea {
     font-style: normal;
     color: #ffd800;
     text-shadow: 1px 3px rgba(0, 0, 0, 0.5), 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.titolo-carrello {
+    font-family: "Madimi One", sans-serif;
 }
 
 
